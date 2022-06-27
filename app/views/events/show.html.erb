@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @event.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @event.description %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @event.price %>
+</p>
+
+<button data-stripe="payment">Buy ticket <%= number_to_currency(@event.price) %></button>
+
+<%= link_to 'Back', events_path %>
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+    document.querySelector("[data-stripe='payment']").addEventListener("click",() => {
+        const stripe = Stripe("<%= Rails.application.credentials.dig(:stripe, :public_key) %>");
+        stripe.redirectToCheckout({
+          sessionId: "<%= @session_id %>"
+        });
+    });
+</script>
