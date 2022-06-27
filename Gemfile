@@ -54,3 +54,5 @@ gem "devise", "~> 4.8"
 gem "stripe", "~> 6.4"
 
 gem "ultrahook", "~> 1.0"
+
+gem "aws-sdk-s3", "~> 1.114"
