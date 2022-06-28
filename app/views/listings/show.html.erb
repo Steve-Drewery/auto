@@ -1,53 +1,43 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @listing.title %>
-</p>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<div>
-  <%= image_tag @listing.picture, alt: @listing.title %>
-</div>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.rtl.min.css" integrity="sha384-dc2NSrAXbAkjrdm9IYrX10fQq9SDG6Vjz7nQVKdKcJl3pC+k37e7qJR5MVSCS+wR" crossorigin="anonymous">
+<div class="container">
+<h2><%= @listing.title %></h2>
+  <div class="card mb-3" style="width: 60rem;">
+  <div class="row g-0">
+    <div class="col-md-4">
+    <div>
+        <%= image_tag @listing.picture, alt: @listing.title if @listing.picture.attached? %>
+      </div>
+      </div>
+ <div class="col-md-8">
+    
+    <div class="card-body">
+      <p class="card-text"><h3>Description: </h3><%= @listing.description %></p>
+      <p class="card-text"><h3>Condition: </h3><%= @listing.condition %></p>
+      <p class="card-text"><h3>Price: </h3><%= number_to_currency(@listing.price) %></p>
+      <p class="card-text"><h3>User: </h3><%= @listing.user_id %></p>
+      <% if @listing.sold %>
+      <p class="card-text"><small class="text-muted">Sold!</small></p>
+      <% elsif current_user.id == @listing.user_id %>
+      <p class="card-text"><h3>You can't buy your own item.</h3></p>
+      <p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @listing.description %>
-</p>
+<% elsif current_user && !@listing.sold  %>
 
-<p>
-  <strong>Condition:</strong>
-  <%= @listing.condition %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @listing.price %>
-</p>
-
-<p>
-  <strong>Sold:</strong>
-  <%= @listing.sold %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @listing.user_id %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @listing.category_id %>
-</p>
-
-<p>
-<% if current_user && !@listing.sold  %>
-<%= button_to "Buy me!", place_order_path, class: "button" %>
-<% elsif !current_user && !@listing.sold %>
-<%= button_to "Buy me!", place_order_path, class: "button" %>
-<% else %>
-<h3>Sold!</h3>
 <% end %>
 </p>
+    </div>
+  </div>
+  </div>
+    </div>
+  <%# </div> %>
 
-<%= link_to 'Edit', edit_listing_path(@listing) %> |
-<%= link_to 'Back', listings_path %>
+<%= link_to 'Edit', edit_listing_path(@listing), class: "btn btn-secondary" %>
+<%= link_to 'Back', listings_path, class: "btn btn-secondary" %>
+</div>

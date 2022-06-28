@@ -1,17 +1,52 @@
-<%= link_to "Home", root_path, class: "button" %>
-<%= link_to "Listings", listings_path, class: "button" %>
-<% if user_signed_in? %>
-<span>
-    <%= link_to "Bought Items", orders_bought_path, class: "button" %>
-    <%= link_to "Sold Items", orders_sold_path, class: "button" %>
-</span>
-<% end %>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<span style="float: right">
-<% if user_signed_in? %>
-    <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "button button-primary" %>
-<% else %>
-    <%= link_to "Sign in", new_user_session_path, class: "button button-primary" %>
-    <%= link_to "Sign up", new_user_registration_path, class: "button button-primary" %>
-<% end %>
-</span>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.rtl.min.css" integrity="sha384-dc2NSrAXbAkjrdm9IYrX10fQq9SDG6Vjz7nQVKdKcJl3pC+k37e7qJR5MVSCS+wR" crossorigin="anonymous">
+
+
+<nav class="navbar navbar-expand-lg bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand text-bg-dark p-3" href="/">Autoparts Market</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link text-bg-dark p-3" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-bg-dark p-3" href="/listings">Listings</a>
+        </li>
+        <% if user_signed_in? %>
+        <li class="nav-item">
+          <a class="nav-link text-bg-dark p-3" href="/orders/bought">Bought</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-bg-dark p-3" href="/orders/sold">Sold</a>
+        </li>
+        <% end %>
+      </ul>
+        <form class="d-flex" role="sign">
+        <% if user_signed_in? %>
+        <li class="nav-item">
+              <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-secondary btn-padding-x:5" %>
+        </li>
+        <% else %>
+        <li class="nav-item">
+          <a class="nav-link text-bg-dark p-3" href="/users/sign_in">Sign In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-bg-dark p-3" href="/users/sign_up">Sign Up</a>
+        </li>
+        <% end %>
+        </form>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>

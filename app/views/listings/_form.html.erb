@@ -1,3 +1,10 @@
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.rtl.min.css" integrity="sha384-dc2NSrAXbAkjrdm9IYrX10fQq9SDG6Vjz7nQVKdKcJl3pC+k37e7qJR5MVSCS+wR" crossorigin="anonymous">
+<div class="container">
 <%= form_with(model: listing) do |form| %>
   <% if listing.errors.any? %>
     <div id="error_explanation">
@@ -10,40 +17,44 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
+<div class=container>
+  <div class="field form-group">
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, class:"form-control" %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :description %>
-    <%= form.rich_text_area :description %>
+    <%= form.rich_text_area :description, class:"form-control" %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <% @conditions.each do |option| %>
       <%= form.label :condition, format_condition(option) %>
       <%= form.radio_button :condition, option %>
     <% end %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :price %>
-    <%= form.number_field :price %>
+    <%= form.number_field :price, class:"form-control" %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :category_id %>
     <%= form.select :category_id, @categories.map {|c| [c.name, c.id]} %>
   </div>
 
-  <div class="field">
+  
+  
+  <div class="field form-group">
     <%= form.label :picture %>
     <%= form.file_field :picture, accept: "image/png,image/jpg,image/jpeg" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions form-group">
+    <%= form.submit class: 'btn btn-secondary' %>
+  </div>
   </div>
 <% end %>
+</div>
